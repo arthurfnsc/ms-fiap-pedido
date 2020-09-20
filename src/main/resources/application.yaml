@@ -1,0 +1,9 @@
+server:
+  servlet:
+      context-path: /mspedido
+  port: ${port:8080}
+
+management:
+  endpoints:
+    web:
+      base-path: /
