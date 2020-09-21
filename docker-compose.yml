@@ -1,0 +1,33 @@
+version: "3"
+services:
+  ms-fiap-pedido:
+    build:
+      context: ./
+      dockerfile: ./Dockerfile
+    image: ms-fiap-pedido/api
+    network_mode: bridge
+    expose:
+      - 8080
+    ports:
+      - 8080:8080
+    restart: unless-stopped
+    environment:
+      - SPRING_DATA_MONGODB_HOST=mongo
+      - SPRING_PROFILES_ACTIVE=dev
+    depends_on:
+      - db
+    links:
+      - db
+  db:
+    image: mongo:3.2.4
+    hostname: mongo
+    network_mode: bridge
+    container_name: fiap-database
+    ports:
+      - 27017:27017
+    volumes:
+      - mongodata:/data/db
+    command: --smallfiles
+
+volumes:
+  mongodata:

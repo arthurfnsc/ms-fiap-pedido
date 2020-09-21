@@ -78,6 +78,7 @@ ext {
         ],
         springBoot : [
             "$springBootGroup:spring-boot-starter",
+            "$springBootGroup:spring-boot-starter-data-mongodb-reactive",
             "$springBootGroup:spring-boot-starter-validation",
             "$springBootGroup:spring-boot-starter-webflux"
         ],
@@ -115,21 +116,19 @@ repositories {
 
 dependencies {
 
-    //api "com.github.pozo:mapstruct-kotlin:$mapstructKotlinVersion"
+    api "com.github.pozo:mapstruct-kotlin:$mapstructKotlinVersion"
 
     detektPlugins "io.gitlab.arturbosch.detekt:detekt-formatting:$detektVersion"
 
-    //kapt "com.github.pozo:mapstruct-kotlin-processor:$mapstructKotlinVersion"
-    //kapt "org.mapstruct:mapstruct-processor:$mapstructVersion"
+    kapt "com.github.pozo:mapstruct-kotlin-processor:$mapstructKotlinVersion"
+    kapt "org.mapstruct:mapstruct-processor:$mapstructVersion"
 
     implementation libs.kotlin
     implementation libs.openApiServer
     implementation libs.springBoot
     implementation libs.springFox
 
-    //implementation "javax.json:javax.json-api:$jsonVersion"
-    //implementation "org.mapstruct:mapstruct:$mapstructVersion"
-    //implementation "org.openapitools:jackson-databind-nullable:$jacksonDatabindNullableVersion"
+    implementation "org.mapstruct:mapstruct:$mapstructVersion"
 
     testImplementation libs.unitTest
 

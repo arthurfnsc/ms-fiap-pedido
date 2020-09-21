@@ -1,5 +1,6 @@
 package br.com.fiap.mba.mspedido.architecture
 
+import br.com.fiap.mba.mspedido.MsPedidoApplication
 import com.tngtech.archunit.core.importer.ClassFileImporter
 import com.tngtech.archunit.core.importer.ImportOption.Predefined.DO_NOT_INCLUDE_TESTS
 import com.tngtech.archunit.core.importer.ImportOptions
@@ -13,9 +14,11 @@ class CamadaDTOTest {
 
         private const val DIRETORIO_ANALISE = "..dtos.."
 
+        private val BASE_PATH = MsPedidoApplication::class.java.`package`.name
+
         private val classes =
             ClassFileImporter(ImportOptions().with(DO_NOT_INCLUDE_TESTS))
-                .importPackages("br.com.fiap.mba.mscambio")
+                .importPackages(BASE_PATH)
     }
 
     @Test
@@ -56,20 +59,6 @@ class CamadaDTOTest {
             .byAnyPackage(
                 "..converters..",
                 "..dtos..",
-                "..services.."
-            )
-            .check(classes)
-    }
-
-    @Test
-    fun `uma dto só pode ter dependência de classes`() {
-        classes()
-            .that().resideInAPackage(DIRETORIO_ANALISE)
-            .should().onlyHaveDependentClassesThat()
-            .resideInAnyPackage(
-                "..converters..",
-                "..dtos..",
-                "..java..",
                 "..services.."
             )
             .check(classes)

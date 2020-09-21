@@ -17,6 +17,7 @@ class OpenAPIConfig {
             .select()
             .apis(RequestHandlerSelectors.basePackage("br.com.fiap.mba.mspedido.resources.impl"))
             .build()
+            .pathMapping("mspedido")
             .apiInfo(this.getApiInfo())
 
     private fun getApiInfo(): ApiInfo {

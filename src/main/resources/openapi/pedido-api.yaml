@@ -26,7 +26,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Pedido"
+                $ref: "#/components/schemas/PedidoId"
         "400":
           description: "Bad Request"
           content:
@@ -52,7 +52,6 @@ paths:
           required: true
           schema:
             type: string
-            format: uuid
       responses:
         "200":
           description: "Ok"
@@ -75,24 +74,6 @@ paths:
 
 components:
   schemas:
-
-    Endereco:
-      description: "Endereco"
-      type: object
-      properties:
-        descricao:
-          type: string
-        bairro:
-          type: string
-        cidade:
-          type: string
-        estado:
-          type: string
-        numero:
-          type: number
-        cep:
-          type: number
-      additionalProperties: false
 
     Erro:
       description: "Erro"
@@ -147,7 +128,6 @@ components:
         id_item:
           description: "Identificador de item de pedido"
           type: string
-          format: uuid
         quantidade:
           description: "Quantidade de item de pedido"
           type: integer
@@ -189,11 +169,20 @@ components:
         id:
           description: "Identificador de pedido"
           type: string
-          format: uuid
         itens:
           $ref: "#/components/schemas/ItemsArray"
-        endereco:
-          $ref: "#/components/schemas/Endereco"
+        descricao:
+          type: string
+        bairro:
+          type: string
+        cidade:
+          type: string
+        estado:
+          type: string
+        numero:
+          type: integer
+        cep:
+          type: integer
         taxa_entrega:
           description: "Taxa de entrega de pedido"
           type: number
@@ -214,6 +203,14 @@ components:
           format: date-time
       additionalProperties: false
 
+    PedidoId:
+      description: "Pedido Id"
+      type: object
+      properties:
+        id:
+          description: "Identificador de pedido"
+          type: string
+
     PedidoPostRequest:
       description: "Dados de requisição de pedido"
       type: object
@@ -221,7 +218,6 @@ components:
         id_restaurante:
           description: "Identificador de restaurante"
           type: string
-          format: uuid
         itens:
           $ref: "#/components/schemas/ItemPedidoRequesArray"
         horario_entrega:
@@ -231,15 +227,12 @@ components:
         id_endereco:
           description: "Identificador de endereco"
           type: string
-          format: uuid
         id_cupom:
           description: "Identificador de cupom de desconto"
           type: string
-          format: uuid
         id_forma_pagamento:
           description: "Identificador de forma de pagamento"
           type: string
-          format: uuid
         cpf:
           description: "CPF cliente"
           type: string

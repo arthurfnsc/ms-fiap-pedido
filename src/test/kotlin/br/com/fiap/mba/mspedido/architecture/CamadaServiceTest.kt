@@ -1,5 +1,6 @@
 package br.com.fiap.mba.mspedido.architecture
 
+import br.com.fiap.mba.mspedido.MsPedidoApplication
 import com.tngtech.archunit.core.importer.ClassFileImporter
 import com.tngtech.archunit.core.importer.ImportOption.Predefined.DO_NOT_INCLUDE_TESTS
 import com.tngtech.archunit.core.importer.ImportOptions
@@ -13,9 +14,11 @@ class CamadaServiceTest {
 
         private const val DIRETORIO_ANALISE = "..services.impl.."
 
+        private val BASE_PATH = MsPedidoApplication::class.java.`package`.name
+
         private val classes =
             ClassFileImporter(ImportOptions().with(DO_NOT_INCLUDE_TESTS))
-                .importPackages("br.com.fiap.mba.mscambio")
+                .importPackages(BASE_PATH)
     }
 
     @Test
@@ -39,12 +42,14 @@ class CamadaServiceTest {
         classes().that().resideInAPackage(DIRETORIO_ANALISE)
             .should().onlyAccessClassesThat()
             .resideInAnyPackage(
-                "..corda..",
                 "..dtos..",
                 "..exceptions..",
                 "..gateways..",
                 "..java..",
                 "..kotlin..",
+                "..models..",
+                "..reactor..",
+                "..repositories..",
                 "..services..",
                 "..springframework.."
             )

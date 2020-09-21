@@ -1,5 +1,6 @@
 package br.com.fiap.mba.mspedido.architecture
 
+import br.com.fiap.mba.mspedido.MsPedidoApplication
 import com.tngtech.archunit.core.importer.ClassFileImporter
 import com.tngtech.archunit.core.importer.ImportOption.Predefined.DO_NOT_INCLUDE_TESTS
 import com.tngtech.archunit.core.importer.ImportOptions
@@ -13,11 +14,13 @@ class CamadaConverterTest {
 
         private const val DIRETORIO_ANALISE = "..converters.."
 
+        private val BASE_PATH = MsPedidoApplication::class.java.`package`.name
+
         private val classes =
             ClassFileImporter(
                 ImportOptions().with(DO_NOT_INCLUDE_TESTS)
             )
-                .importPackages("br.com.fiap.mba.mscambio")
+                .importPackages(BASE_PATH)
 
     }
 
@@ -45,11 +48,10 @@ class CamadaConverterTest {
             .should().onlyAccessClassesThat()
             .resideInAnyPackage(
                 "..converters..",
-                "..corda..",
                 "..dtos..",
                 "..java..",
-                "..openapi..",
-                "..states.."
+                "..models..",
+                "..openapi.."
             ).orShould().beInnerClasses()
             .check(classes)
     }
@@ -71,13 +73,13 @@ class CamadaConverterTest {
         classes().that().resideInAPackage(DIRETORIO_ANALISE)
             .should().onlyDependOnClassesThat()
             .resideInAnyPackage(
-                "..corda..",
                 "..converters..",
                 "..dtos..",
                 "..java..",
                 "..jetbrains..",
                 "..kotlin..",
                 "..mapstruct..",
+                "..models..",
                 "..openapi..",
                 "..springframework.."
             ).orShould().beInnerClasses()

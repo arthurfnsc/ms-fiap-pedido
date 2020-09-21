@@ -4,12 +4,13 @@ import com.tngtech.archunit.core.domain.JavaClasses
 import com.tngtech.archunit.junit.AnalyzeClasses
 import com.tngtech.archunit.junit.ArchTest
 import com.tngtech.archunit.lang.syntax.ArchRuleDefinition.classes
+import org.mapstruct.Mapper
 //import org.mapstruct.Mapper
 import org.springframework.context.annotation.Configuration
 import org.springframework.stereotype.Service
 import org.springframework.web.bind.annotation.RestController
 
-@AnalyzeClasses(packages = ["br.com.fiap.mba.mscambio"])
+@AnalyzeClasses(packages = ["br.com.fiap.mba.mspedido"])
 class CamadasTest {
 
     @ArchTest
@@ -23,7 +24,7 @@ class CamadasTest {
             .check(classes)
     }
 
-    /*@ArchTest
+    @ArchTest
     private fun `classes Converter devem estar no diretório converters`(classes: JavaClasses) {
 
         classes()
@@ -32,7 +33,7 @@ class CamadasTest {
             .andShould().beAnnotatedWith(Mapper::class.java)
             .`as`("classes Converter devem estar no diretório 'converters'")
             .check(classes)
-    }*/
+    }
 
     @ArchTest
     private fun `classes DTO devem estar no diretório dtos`(classes: JavaClasses) {

@@ -11,18 +11,8 @@ import com.tngtech.archunit.library.GeneralCodingRules.USE_JAVA_UTIL_LOGGING
 import com.tngtech.archunit.library.GeneralCodingRules.USE_JODATIME
 import org.slf4j.Logger
 
-@AnalyzeClasses(packages = ["br.com.fiap.mba.mscambio"])
+@AnalyzeClasses(packages = ["br.com.fiap.mba.mspedido"])
 class CodificacaoTest {
-
-    @ArchTest
-    private fun `classes não devem lançar exceção genérica`(classes: JavaClasses) {
-        noClasses().should(THROW_GENERIC_EXCEPTIONS).check(classes)
-    }
-
-    @ArchTest
-    private fun `classes não devem utilizar o console para escrever informação`(classes: JavaClasses) {
-        noClasses().should(ACCESS_STANDARD_STREAMS).check(classes)
-    }
 
     @ArchTest
     private fun `classes não devem utilizar o java_util_logging_Logger`(classes: JavaClasses) {

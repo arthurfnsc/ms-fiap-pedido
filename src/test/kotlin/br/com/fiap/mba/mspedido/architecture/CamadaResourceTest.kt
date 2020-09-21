@@ -1,5 +1,6 @@
 package br.com.fiap.mba.mspedido.architecture
 
+import br.com.fiap.mba.mspedido.MsPedidoApplication
 import com.tngtech.archunit.core.importer.ClassFileImporter
 import com.tngtech.archunit.core.importer.ImportOption.Predefined.DO_NOT_INCLUDE_TESTS
 import com.tngtech.archunit.core.importer.ImportOptions
@@ -13,9 +14,11 @@ class CamadaResourceTest {
 
         private const val DIRETORIO_ANALISE = "..resources.impl.."
 
+        private val BASE_PATH = MsPedidoApplication::class.java.`package`.name
+
         private val classes =
             ClassFileImporter(ImportOptions().with(DO_NOT_INCLUDE_TESTS))
-                .importPackages("br.com.fiap.mba.mscambio")
+                .importPackages(BASE_PATH)
     }
 
     @Test
@@ -42,28 +45,11 @@ class CamadaResourceTest {
             .should().onlyAccessClassesThat()
             .resideInAnyPackage(
                 "..converters..",
-                "..corda..",
                 "..java..",
                 "..kotlin..",
                 "..openapi..",
+                "..reactor..",
                 "..resources..",
-                "..services..",
-                "..springframework.."
-            )
-            .check(classes)
-    }
-
-    @Test
-    fun `uma controller só pode depender de classes`() {
-        classes().that().resideInAPackage(DIRETORIO_ANALISE)
-            .should().onlyDependOnClassesThat()
-            .resideInAnyPackage(
-                "..converters..",
-                "..corda..",
-                "..java..",
-                "..jetbrains..",
-                "..kotlin..",
-                "..openapi..",
                 "..services..",
                 "..springframework.."
             )

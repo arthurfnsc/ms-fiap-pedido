@@ -1,5 +1,6 @@
 package br.com.fiap.mba.mspedido.architecture
 
+import br.com.fiap.mba.mspedido.MsPedidoApplication
 import com.tngtech.archunit.core.importer.ClassFileImporter
 import com.tngtech.archunit.core.importer.ImportOption
 import com.tngtech.archunit.core.importer.ImportOptions
@@ -13,9 +14,11 @@ class CamadaConfigTest {
 
         const val DIRETORIO_ANALISE = "..configs.."
 
+        private val BASE_PATH = MsPedidoApplication::class.java.`package`.name
+
         private val classes =
             ClassFileImporter(ImportOptions().with(ImportOption.Predefined.DO_NOT_INCLUDE_TESTS))
-                .importPackages("br.com.fiap.mba.mscambio")
+                .importPackages(BASE_PATH)
     }
 
     @Test
