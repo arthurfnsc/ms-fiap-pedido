@@ -1,34 +1,19 @@
-apply plugin: 'com.hello2morrow.sonargraph'
 apply plugin: 'org.sonarqube'
-
-sonargraph {
-
-    activationCode = "36E2-0F3E-643F-B4F2"
-    qualityModelFile = "Sonargraph:Java.sgqm" // quality model used by task 'sonargraphDynamicReport'
-    failSet {
-
-        failOnEmptyWorkspace = true
-        include(issueType: "any", severity: "error", resolution: "none")
-        include(issueType: "ArchitectureViolation")
-        include(issueType: "any", severity: "warning")
-        exclude(issueType: "ThresholdViolation")
-        include(issueType: "NamespaceCycleGroup")
-    }
-}
 
 sonarqube {
     properties {
-        property "sonar.projectName", rootProject.name
-        property "sonar.projectKey", rootProject.name
-        property "sonar.projectVersion", rootProject.version
-        //property "sonar.host.url", System.getenv('SONARQUBE_HOST')
-        //property "sonar.login", System.getenv('SONARQUBE_TOKEN')
+        property "sonar.projectName", project.name
+        property "sonar.projectKey", project.name
+        property "sonar.projectVersion", project.version
+        property "sonar.host.url", "http://localhost:9000"
+        property "sonar.login", "admin"
+        property "sonar.password", "admin"
         property 'sonar.dokka.source', JavaVersion.VERSION_1_8
         property 'sonar.dokka.target', JavaVersion.VERSION_1_8
         property 'sonar.sourceEncoding', 'UTF-8'
         property "sonar.scm.provider", "git"
         property "sonar.import_unknown_files", true
-        // SonarQube 6.2+
+        property "sonar.dependencyCheck.htmlReportPath", "$rootDir/build/reports/dependencyCheck/dependency-check-report.html"
         property 'sonar.jacoco.reportPaths', fileTree(dir: project.projectDir, includes: ['**/*.exec', '**/*.ec'])
     }
 }

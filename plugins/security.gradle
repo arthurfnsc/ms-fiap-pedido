@@ -12,5 +12,5 @@ dependencyCheck {
 
     autoUpdate = true
     format = "ALL"
-    outputDirectory = "build/reports/dependencyCheck"
+    outputDirectory = "$rootDir/build/reports/dependencyCheck"
 }
