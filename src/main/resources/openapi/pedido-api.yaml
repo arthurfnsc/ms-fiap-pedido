@@ -1,0 +1,239 @@
+openapi: "3.0.0"
+info:
+  version: "1.0.0"
+  title: "Pedido REST API"
+servers:
+  - url: "{server}"
+    variables:
+      server:
+        default: "https://api.example.com"
+paths:
+  "/v1/pedidos":
+    post:
+      summary: "Cadastro de pedido"
+      description: "Cadastro de pedido a iFood"
+      operationId: "criarPedido"
+      requestBody:
+        description: "Parâmetros de pedido."
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/PedidoPostRequest"
+      responses:
+        "201":
+          description: "Created"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PedidoId"
+        "400":
+          description: "Bad Request"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Erro"
+        "500":
+          description: "Internal Server Error"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Erro"
+
+  "/v1/pedidos/{id}":
+    get:
+      summary: "Recuperar pedido"
+      description: "Recuperar pedido do iFood."
+      operationId: "recuperarPedido"
+      parameters:
+        - in: path
+          name: "id"
+          description: "Identificador de Pedido."
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: "Ok"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Pedido"
+        "404":
+          description: "Not Found"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Erro"
+        "500":
+          description: "Internal Server Error"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Erro"
+
+components:
+  schemas:
+
+    Erro:
+      description: "Erro"
+      type: object
+      properties:
+        httpCode:
+          description: "HTTP Code. ex:  400, 401, 404."
+          type: integer
+        httpMessage:
+          description: "HTTP Status Message. ex: Bad Request, Unauthorized, Not Found."
+          type: string
+        descricao:
+          description: "Descrição de erro."
+          type: string
+        parametrosInvalidos:
+          $ref: "#/components/schemas/ParametroInvalidoArray"
+      additionalProperties: false
+
+    Item:
+      description: "Item"
+      type: object
+      properties:
+        nome:
+          description: "Nome de item"
+          type: string
+        descricao:
+          description: "Descricao de item"
+          type: string
+        quantidade:
+          description: "Quantidade de item"
+          type: integer
+        valor:
+          description: "Valor de item"
+          type: number
+          format: double
+        observacao:
+          description: "Observação de item"
+          type: string
+      additionalProperties: false
+
+    ItemsArray:
+      description: "Lista de Item"
+      type: array
+      items:
+        $ref: "#/components/schemas/Item"
+      additionalProperties: false
+
+    ItemPedidoRequest:
+      description: "Item de pedido request"
+      type: object
+      properties:
+        id_item:
+          description: "Identificador de item de pedido"
+          type: string
+        quantidade:
+          description: "Quantidade de item de pedido"
+          type: integer
+        observacao:
+          description: "Observação de item de pedido"
+          type: string
+      additionalProperties: false
+
+    ItemPedidoRequesArray:
+      description: "Lista de Item de Pedido"
+      type: array
+      items:
+        $ref: "#/components/schemas/ItemPedidoRequest"
+      additionalProperties: false
+
+    ParametroInvalido:
+      description: "Parâmetro Inválido"
+      type: object
+      properties:
+        nome:
+          description: "Nome parâmetro"
+          type: string
+        descricao:
+          description: "Descrição Parâmetro"
+          type: string
+      additionalProperties: false
+
+    ParametroInvalidoArray:
+      description: "Lista de Parâmetro Inválido"
+      type: array
+      items:
+        $ref: "#/components/schemas/ParametroInvalido"
+      additionalProperties: false
+
+    Pedido:
+      description: "Pedido"
+      type: object
+      properties:
+        id:
+          description: "Identificador de pedido"
+          type: string
+        itens:
+          $ref: "#/components/schemas/ItemsArray"
+        descricao:
+          type: string
+        bairro:
+          type: string
+        cidade:
+          type: string
+        estado:
+          type: string
+        numero:
+          type: integer
+        cep:
+          type: integer
+        taxa_entrega:
+          description: "Taxa de entrega de pedido"
+          type: number
+          format: double
+        desconto:
+          description: "Desconto de pedido"
+          type: number
+          format: double
+        total:
+          description: "Total de pedido"
+          type: number
+          format: double
+        status:
+          type: string
+        criado_em:
+          description: "Horário de pedido"
+          type: string
+          format: date-time
+      additionalProperties: false
+
+    PedidoId:
+      description: "Pedido Id"
+      type: object
+      properties:
+        id:
+          description: "Identificador de pedido"
+          type: string
+
+    PedidoPostRequest:
+      description: "Dados de requisição de pedido"
+      type: object
+      properties:
+        id_restaurante:
+          description: "Identificador de restaurante"
+          type: string
+        itens:
+          $ref: "#/components/schemas/ItemPedidoRequesArray"
+        horario_entrega:
+          description: "Horário de entrega"
+          type: string
+          format: date-time
+        id_endereco:
+          description: "Identificador de endereco"
+          type: string
+        id_cupom:
+          description: "Identificador de cupom de desconto"
+          type: string
+        id_forma_pagamento:
+          description: "Identificador de forma de pagamento"
+          type: string
+        cpf:
+          description: "CPF cliente"
+          type: string
+      additionalProperties: false

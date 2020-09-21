@@ -1,0 +1,16 @@
+server:
+  port: ${port:8080}
+
+spring:
+  data:
+    mongodb:
+      host: mongo
+      port: 27017
+      database: fiap-database
+  webflux:
+    base-path: mspedido
+
+management:
+  endpoints:
+    web:
+      base-path: /

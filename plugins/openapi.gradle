@@ -1,0 +1,43 @@
+buildscript {
+
+    repositories {
+        mavenLocal()
+        maven { url "https://repo1.maven.org/maven2" }
+    }
+
+    dependencies {
+        classpath "org.openapitools:openapi-generator-gradle-plugin:$openAPIGeneratorVersion"
+    }
+}
+
+apply plugin: "org.openapi.generator"
+
+def apiServerOutput = "$buildDir/generated/openapi-code-server".toString()
+
+task generateApiServer(type: org.openapitools.generator.gradle.plugin.tasks.GenerateTask) {
+
+    generatorName = "spring"
+    inputSpec = "$projectDir/src/main/resources/openapi/pedido-api.yaml".toString()
+    outputDir = apiServerOutput
+
+    apiPackage = "org.openapi.pedido.server.api"
+    modelPackage = "org.openapi.pedido.server.model"
+
+    configOptions = [
+        "dateLibrary": "java8-localdatetime",
+        "hideGenerationTimestamp": "true",
+        "interfaceOnly": "true",
+        "java8": "true",
+        "performBeanValidation": "false",
+        "reactive" : "true",
+        "serializableModel": "true",
+        "useBeanValidation": "false",
+        "useOptional": "true"
+    ]
+}
+
+compileKotlin.dependsOn(
+    generateApiServer
+)
+
+sourceSets.main.java.srcDir "$apiServerOutput/src/main/java"
