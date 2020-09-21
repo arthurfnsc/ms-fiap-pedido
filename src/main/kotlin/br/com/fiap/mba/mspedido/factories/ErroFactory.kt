@@ -1,7 +1,7 @@
 package br.com.fiap.mba.mspedido.factories
 
-import org.openapi.cambio.server.model.Erro
-import org.openapi.cambio.server.model.ParametroInvalido
+import org.openapi.pedido.server.model.Erro
+import org.openapi.pedido.server.model.ParametroInvalido
 import org.springframework.http.HttpStatus
 
 class ErroFactory {

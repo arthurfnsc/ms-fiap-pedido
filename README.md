@@ -93,7 +93,7 @@ foo@bar:~$ sdk list gradle
 │     │     │             └── java
 │     │     │                 └── org
 │     │     │                     └── openapi
-│     │     │                         └── cambio
+│     │     │                         └── pedido
 │     │     │                             └── server
 │     │     │                                 ├── api
 │     │     │                                 │     ├── ApiUtil.java
@@ -366,7 +366,7 @@ foo@bar:ms-fiap-pedido [./gradlew | gradlew.bat] sonarqube
 ### Erros ao importar projeto em IDE
 
 É comum ao importar o projeto em uma IDE que classes contidas nos
-pacotes **org.openapi.cambio.server** apresentem erros de compilação.
+pacotes **org.openapi.pedido.server** apresentem erros de compilação.
 
 Isso ocorre porque ao utilizar a estratégia de API First é necessário
 a geração das classes para que o projeto possa compilar.
@@ -394,7 +394,7 @@ foo@bar:ms-fiap-pedido [./gradlew | gradlew.bat] compileKotlin
 Ou a execução de outras tasks que tenham relação direta com o **compileKotlin**,
 como **build** ou **bootRun**.
 
-As classes geradas se encontrarão no diretório **org.openapi.cambio.server**
+As classes geradas se encontrarão no diretório **org.openapi.pedido.server**
 dentro do projeto **application/rest-api**
 
 ```console
@@ -407,7 +407,7 @@ dentro do projeto **application/rest-api**
                     └── java
                         └── org
                             └── openapi
-                                └── cambio
+                                └── pedido
                                     └── server
                                         ├── api
                                         └── model

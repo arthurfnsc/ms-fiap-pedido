@@ -3,8 +3,8 @@ package br.com.fiap.mba.mspedido.converters
 import br.com.fiap.mba.mspedido.dtos.ItemPedidoRequestDTO
 import br.com.fiap.mba.mspedido.models.Item
 import org.mapstruct.Mapper
-import org.openapi.cambio.server.model.ItemPedidoRequest
-import org.openapi.cambio.server.model.Item as ItemSchema
+import org.openapi.pedido.server.model.ItemPedidoRequest
+import org.openapi.pedido.server.model.Item as ItemSchema
 
 @Mapper(
     componentModel = "spring"

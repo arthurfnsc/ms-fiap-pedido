@@ -20,8 +20,8 @@ task generateApiServer(type: org.openapitools.generator.gradle.plugin.tasks.Gene
     inputSpec = "$projectDir/src/main/resources/openapi/pedido-api.yaml".toString()
     outputDir = apiServerOutput
 
-    apiPackage = "org.openapi.cambio.server.api"
-    modelPackage = "org.openapi.cambio.server.model"
+    apiPackage = "org.openapi.pedido.server.api"
+    modelPackage = "org.openapi.pedido.server.model"
 
     configOptions = [
         "dateLibrary": "java8-localdatetime",

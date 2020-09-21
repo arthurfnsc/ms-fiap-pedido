@@ -2,10 +2,10 @@ package br.com.fiap.mba.mspedido.resources.impl
 
 import br.com.fiap.mba.mspedido.converters.PedidoConverter
 import br.com.fiap.mba.mspedido.services.PedidoService
-import org.openapi.cambio.server.api.V1Api
-import org.openapi.cambio.server.model.Pedido
-import org.openapi.cambio.server.model.PedidoId
-import org.openapi.cambio.server.model.PedidoPostRequest
+import org.openapi.pedido.server.api.V1Api
+import org.openapi.pedido.server.model.Pedido
+import org.openapi.pedido.server.model.PedidoId
+import org.openapi.pedido.server.model.PedidoPostRequest
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.RestController
